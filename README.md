@@ -81,6 +81,6 @@ docker run -it --rm \
 -v ~/volume/flrig/.flrig:/root/.flrig \
 -v ~/volume/flrig/.fltk:/root/.fltx \
 --group-add $(getent group audio | cut -d: -f3) \
-registry.hakankoseoglu.com/fldigi:`arch`
+hakankoseoglu/fldigi:`arch`
 
 
