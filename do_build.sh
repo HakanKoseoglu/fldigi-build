@@ -26,7 +26,7 @@ function do_build() {
     cd $folder
     CPPFLAGS="-I/usr/include/libusb-1.0"
     LDFLAGS="-L/usr/lib/x86_64-linux-gnu"
-    ./configure --prefix=/fldigi --enable-static --enable-optimizations=native
+    ./configure --prefix=/fldigi --enable-static
     make -j $(nproc)
     make install
 }
