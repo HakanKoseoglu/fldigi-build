@@ -53,3 +53,34 @@ drwxr-xr-x  7 jacob jacob    4096 May 26 12:46 flrig-1.3.54/
 
 ```
 
+
+
+Hakan's addendum:
+
+To run, create a little script, or a docker-composse equivalent, like below:
+
+hakan@enigma:~/VMapp/fldigi-build$ cat ~/bin/runfldigi 
+xhost +"local:docker@"
+
+docker run -it --rm \
+--name fldigi \
+--device /dev/snd:/dev/snd \
+--device /dev/dri \
+--device=/dev/ttyUSB0 \
+-e DISPLAY=unix:0 \
+-e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
+-v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
+-v ~/.config/pulse/cookie:/root/.config/pulse/cookie \
+-v /dev/shm:/dev/shm \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-v /run/dbus/:/run/dbus/ \
+-v /dev/shm:/dev/shm \
+-v ~/volume/.local/share/WSJT-X:/root/.local/share/WSJT-X \
+-v ~/volume/flrig/.config:/root/.config \
+-v ~/volume/flrig/.fldigi:/root/.fldigi \
+-v ~/volume/flrig/.flrig:/root/.flrig \
+-v ~/volume/flrig/.fltk:/root/.fltx \
+--group-add $(getent group audio | cut -d: -f3) \
+registry.hakankoseoglu.com/fldigi:`arch`
+
+
